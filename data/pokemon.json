@@ -1,0 +1,279 @@
+[
+  {
+    "id": 1,
+    "name": "Bulbasaur",
+    "types": [
+      "Grass",
+      "Poison"
+    ],
+    "stats": {
+      "hp": 45,
+      "attack": 49,
+      "defense": 49,
+      "spAtk": 65,
+      "spDef": 65,
+      "speed": 45
+    },
+    "isLegendary": false,
+    "isMythical": false,
+    "isStarter": true,
+    "image": "./assets/pokemon/bulbasaur.jpg",
+    "height": "0.7 m",
+    "weight": "6.9 kg",
+    "eggGroups": [
+      "Grass",
+      "Monster"
+    ],
+    "flavorText": "A strange seed was planted on its back at birth. The plant sprouts and grows with this POK\u00e9MON.",
+    "abilities": [
+      "Overgrow",
+      "Chlorophyll"
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Ivysaur",
+    "types": [
+      "Grass",
+      "Poison"
+    ],
+    "stats": {
+      "hp": 60,
+      "attack": 62,
+      "defense": 63,
+      "spAtk": 80,
+      "spDef": 80,
+      "speed": 60
+    },
+    "isLegendary": false,
+    "isMythical": false,
+    "isStarter": true,
+    "image": "./assets/pokemon/ivysaur.jpg",
+    "height": "1.0 m",
+    "weight": "13.0 kg",
+    "eggGroups": [
+      "Grass",
+      "Monster"
+    ],
+    "flavorText": "When the bulb on its back grows large, it appears to lose the ability to stand on its hind legs.",
+    "abilities": [
+      "Overgrow",
+      "Chlorophyll"
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Venusaur",
+    "types": [
+      "Grass",
+      "Poison"
+    ],
+    "stats": {
+      "hp": 80,
+      "attack": 82,
+      "defense": 83,
+      "spAtk": 100,
+      "spDef": 100,
+      "speed": 80
+    },
+    "isLegendary": false,
+    "isMythical": false,
+    "isStarter": true,
+    "image": "./assets/pokemon/venusaur.jpg",
+    "height": "2.0 m",
+    "weight": "100.0 kg",
+    "eggGroups": [
+      "Grass",
+      "Monster"
+    ],
+    "flavorText": "The plant blooms when it is absorbing solar energy. It stays on the move to seek sunlight.",
+    "abilities": [
+      "Overgrow",
+      "Chlorophyll",
+      "Thick Fat"
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Charmander",
+    "types": [
+      "Fire"
+    ],
+    "stats": {
+      "hp": 39,
+      "attack": 52,
+      "defense": 43,
+      "spAtk": 60,
+      "spDef": 50,
+      "speed": 65
+    },
+    "isLegendary": false,
+    "isMythical": false,
+    "isStarter": true,
+    "image": "./assets/pokemon/charmander.jpg",
+    "height": "0.6 m",
+    "weight": "8.5 kg",
+    "eggGroups": [
+      "Dragon",
+      "Monster"
+    ],
+    "flavorText": "Obviously prefers hot places. When it rains, steam is said to spout from the tip of its tail.",
+    "abilities": [
+      "Blaze",
+      "Solar Power"
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Charmeleon",
+    "types": [
+      "Fire"
+    ],
+    "stats": {
+      "hp": 58,
+      "attack": 64,
+      "defense": 58,
+      "spAtk": 80,
+      "spDef": 65,
+      "speed": 80
+    },
+    "isLegendary": false,
+    "isMythical": false,
+    "isStarter": true,
+    "image": "./assets/pokemon/charmeleon.jpg",
+    "height": "1.1 m",
+    "weight": "19.0 kg",
+    "eggGroups": [
+      "Dragon",
+      "Monster"
+    ],
+    "flavorText": "When it swings its burning tail, it elevates the temperature to unbearably high levels.",
+    "abilities": [
+      "Blaze",
+      "Solar Power"
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Charizard",
+    "types": [
+      "Fire",
+      "Flying"
+    ],
+    "stats": {
+      "hp": 78,
+      "attack": 84,
+      "defense": 78,
+      "spAtk": 109,
+      "spDef": 85,
+      "speed": 100
+    },
+    "isLegendary": false,
+    "isMythical": false,
+    "isStarter": true,
+    "image": "./assets/pokemon/charizard.jpg",
+    "height": "1.7 m",
+    "weight": "90.5 kg",
+    "eggGroups": [
+      "Dragon",
+      "Monster"
+    ],
+    "flavorText": "Spits fire that is hot enough to melt boulders. Known to cause forest fires unintentionally.",
+    "abilities": [
+      "Blaze",
+      "Solar Power",
+      "Tough Claws"
+    ]
+  },
+  {
+    "id": 7,
+    "name": "Squirtle",
+    "types": [
+      "Water"
+    ],
+    "stats": {
+      "hp": 44,
+      "attack": 48,
+      "defense": 65,
+      "spAtk": 50,
+      "spDef": 64,
+      "speed": 43
+    },
+    "isLegendary": false,
+    "isMythical": false,
+    "isStarter": true,
+    "image": "./assets/pokemon/squirtle.jpg",
+    "height": "0.5 m",
+    "weight": "9.0 kg",
+    "eggGroups": [
+      "Monster",
+      "Water 1"
+    ],
+    "flavorText": "After birth, its back swells and hardens into a shell. Powerfully sprays foam from its mouth.",
+    "abilities": [
+      "Torrent",
+      "Rain Dish"
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Wartortle",
+    "types": [
+      "Water"
+    ],
+    "stats": {
+      "hp": 59,
+      "attack": 63,
+      "defense": 80,
+      "spAtk": 65,
+      "spDef": 80,
+      "speed": 58
+    },
+    "isLegendary": false,
+    "isMythical": false,
+    "isStarter": true,
+    "image": "./assets/pokemon/wartortle.jpg",
+    "height": "1.0 m",
+    "weight": "22.5 kg",
+    "eggGroups": [
+      "Monster",
+      "Water 1"
+    ],
+    "flavorText": "Often hides in water to stalk unwary prey. For swimming fast, it moves its ears to maintain balance.",
+    "abilities": [
+      "Torrent",
+      "Rain Dish"
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Blastoise",
+    "types": [
+      "Water"
+    ],
+    "stats": {
+      "hp": 79,
+      "attack": 83,
+      "defense": 100,
+      "spAtk": 85,
+      "spDef": 105,
+      "speed": 78
+    },
+    "isLegendary": false,
+    "isMythical": false,
+    "isStarter": true,
+    "image": "./assets/pokemon/blastoise.jpg",
+    "height": "1.6 m",
+    "weight": "85.5 kg",
+    "eggGroups": [
+      "Monster",
+      "Water 1"
+    ],
+    "flavorText": "A brutal POK\u00e9MON with pressurized water jets on its shell. They are used for high speed tackles.",
+    "abilities": [
+      "Torrent",
+      "Rain Dish",
+      "Mega Launcher"
+    ]
+  }
+]
