@@ -33,5 +33,5 @@
 
 ## Data
 
-- since we cant use apis, i'll have to manually fetch from Poke API's github for assets and information.
-  - https://github.com/PokeAPI/pokeapi
+- since we cant use apis, i'll have to manually fetch from PokemonDB
+  - https://pokemondb.net/pokedex/national#gen-1
