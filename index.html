@@ -1,31 +1,167 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PokeBased</title>
-    <meta name="description" content="The only pokemon tool you'll ever need" />
+    <meta name="description" content="The only Pokémon tool you'll ever need" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Press+Start+2P&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
-    <script type="text/javascript" src="scripts.js"></script>
   </head>
 
   <body>
-    <header class="main-header">
-      <h1 class="title">PokeBased</h1>
-    </header>
-    <div id="card-container"></div>
-    <div class="card" style="display: none">
-      <div class="card-content">
-        <h2>Pokemon</h2>
-        <img src="" alt="Pokemon Sprite" />
-        <ul>
-          <li>Bullet Point 1</li>
-          <li>Bullet Point 2</li>
-          <li>Bullet Point 3</li>
-        </ul>
+
+    <!-- ── HEADER ─────────────────────────────────────────── -->
+    <header class="site-header">
+      <div class="header-inner">
+        <div class="header-brand">
+          <span class="pokeball-icon" aria-hidden="true"></span>
+          <h1 class="site-title">PokeBased</h1>
+          <span class="pokedex-label">GEN I · 151</span>
+        </div>
+
+        <div class="controls">
+          <div class="search-wrap">
+            <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input
+              type="text"
+              id="search-input"
+              class="search-input"
+              placeholder="Search Pokémon..."
+              autocomplete="off"
+            />
+          </div>
+
+          <select id="sort-select" class="sort-select">
+            <option value="id">Sort: #ID</option>
+            <option value="name">Sort: Name</option>
+            <option value="hp">Sort: HP</option>
+            <option value="attack">Sort: Attack</option>
+            <option value="speed">Sort: Speed</option>
+          </select>
+        </div>
       </div>
-    </div>
-    <div class="footer">
-      <button onclick="quoteAlert()">Get A Quote!</button>
-      <button onclick="removeLastCard()">Remove A Card!</button>
-    </div>
+
+      <!-- Type filter badges — JS can also build these dynamically -->
+      <div class="type-filter-bar" id="type-filters">
+        <button class="type-badge active" data-type="all">All</button>
+        <button class="type-badge" data-type="Fire">Fire</button>
+        <button class="type-badge" data-type="Water">Water</button>
+        <button class="type-badge" data-type="Grass">Grass</button>
+        <button class="type-badge" data-type="Poison">Poison</button>
+        <button class="type-badge" data-type="Flying">Flying</button>
+        <button class="type-badge" data-type="Psychic">Psychic</button>
+        <button class="type-badge" data-type="Rock">Rock</button>
+        <button class="type-badge" data-type="Ground">Ground</button>
+        <button class="type-badge" data-type="Ice">Ice</button>
+        <button class="type-badge" data-type="Electric">Electric</button>
+        <button class="type-badge" data-type="Ghost">Ghost</button>
+        <button class="type-badge" data-type="Dragon">Dragon</button>
+        <button class="type-badge" data-type="Fighting">Fighting</button>
+        <button class="type-badge" data-type="Normal">Normal</button>
+        <button class="type-badge" data-type="Bug">Bug</button>
+      </div>
+    </header>
+
+    <!-- ── MAIN GRID ──────────────────────────────────────── -->
+    <main class="main-content">
+      <p class="results-count" id="results-count">Showing <span id="count-number">0</span> Pokémon</p>
+      <div id="card-container" class="card-grid"></div>
+    </main>
+
+    <!-- ── CARD TEMPLATE (hidden — cloned by JS) ─────────── -->
+    <template id="card-template">
+      <article class="card" data-id="" data-primary-type="">
+        <div class="card-header">
+          <span class="card-number"></span>
+          <div class="card-badges">
+            <!-- JS injects .badge-legendary or .badge-starter spans here -->
+          </div>
+        </div>
+        <div class="card-image-wrap">
+          <img class="card-image" src="" alt="" loading="lazy" />
+        </div>
+        <div class="card-body">
+          <h2 class="card-name"></h2>
+          <div class="card-types">
+            <!-- JS injects <span class="type-pip type-{name}"> -->
+          </div>
+          <p class="card-flavor"></p>
+          <div class="card-stats">
+            <!-- JS injects stat rows -->
+          </div>
+          <div class="card-meta">
+            <span class="meta-item"><span class="meta-label">HT</span><span class="meta-value card-height"></span></span>
+            <span class="meta-item"><span class="meta-label">WT</span><span class="meta-value card-weight"></span></span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button class="btn-add-team" data-id="" aria-label="Add to team">+ Team</button>
+        </div>
+      </article>
+    </template>
+
+    <!-- ── MODAL (native <dialog>) ───────────────────────── -->
+    <dialog id="pokemon-modal" class="pokemon-modal">
+      <div class="modal-inner">
+        <button class="modal-close" id="modal-close" aria-label="Close">✕</button>
+        <div class="modal-left">
+          <span class="modal-number" id="modal-number"></span>
+          <div class="modal-badges" id="modal-badges"></div>
+          <img class="modal-image" id="modal-image" src="" alt="" />
+          <div class="modal-types" id="modal-types"></div>
+          <p class="modal-flavor" id="modal-flavor"></p>
+        </div>
+        <div class="modal-right">
+          <h2 class="modal-name" id="modal-name"></h2>
+          <section class="modal-section">
+            <h3 class="modal-section-title">Base Stats</h3>
+            <div class="modal-stats" id="modal-stats"></div>
+          </section>
+          <section class="modal-section">
+            <h3 class="modal-section-title">Details</h3>
+            <div class="modal-details">
+              <div class="detail-row">
+                <span class="detail-label">Height</span>
+                <span class="detail-value" id="modal-height"></span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Weight</span>
+                <span class="detail-value" id="modal-weight"></span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Abilities</span>
+                <span class="detail-value" id="modal-abilities"></span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Egg Groups</span>
+                <span class="detail-value" id="modal-egg-groups"></span>
+              </div>
+            </div>
+          </section>
+          <button class="btn-add-team btn-modal-add" id="modal-add-btn" data-id="">+ Add to Team</button>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- ── TEAM PANEL (sticky bottom) ────────────────────── -->
+    <aside class="team-panel" id="team-panel">
+      <div class="team-panel-inner">
+        <span class="team-label">My Team</span>
+        <div class="team-slots" id="team-slots">
+          <div class="team-slot empty" data-slot="0"></div>
+          <div class="team-slot empty" data-slot="1"></div>
+          <div class="team-slot empty" data-slot="2"></div>
+          <div class="team-slot empty" data-slot="3"></div>
+          <div class="team-slot empty" data-slot="4"></div>
+          <div class="team-slot empty" data-slot="5"></div>
+        </div>
+        <button class="btn-clear-team" id="clear-team-btn">Clear</button>
+      </div>
+    </aside>
+
+    <script src="scripts.js"></script>
   </body>
 </html>

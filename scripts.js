@@ -30,6 +30,45 @@ const CURB_POSTER_URL =
 const EAST_LOS_HIGH_POSTER_URL =
   "https://static.wikia.nocookie.net/hulu/images/6/64/East_Los_High.jpg";
 
+//manually input pokemon in internal data here
+const POKEMON = {
+  //TEMPLATE, COPY PASTE//
+  {
+    "id": ,
+    "name": "",
+    "types": [
+      ""
+    ],
+    "stats": {
+      "hp": ,
+      "attack": ,
+      "defense": ,
+      "spAtk": ,
+      "spDef": ,
+      "speed": 
+    },
+    //bools
+    "isLegendary": false,
+    "isMythical": false,
+    "isStarter": true,
+    //image call from assets/pokemon
+    "image": "./assets/pokemon/.jpg",
+    "height": " m", //string, include m
+    "weight": " kg", //string, include kg
+    "eggGroups": [
+      "",
+      ""
+    ],
+    "flavorText": "",
+    "abilities": [
+      "",
+    ]
+  }
+  //TEMPLATE END//
+
+  
+}
+
 // This is an array of strings (TV show titles)
 let titles = [
   "Fresh Prince of Bel Air",
