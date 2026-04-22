@@ -34,34 +34,38 @@
             />
           </div>
 
-          <select id="sort-select" class="sort-select">
+          <select id="sort-select" class="sort-select" aria-label="Sort Pokémon">
             <option value="id">Sort: #ID</option>
             <option value="name">Sort: Name</option>
             <option value="hp">Sort: HP</option>
             <option value="attack">Sort: Attack</option>
+            <option value="defense">Sort: Defense</option>
+            <option value="spAtk">Sort: Sp. Atk</option>
+            <option value="spDef">Sort: Sp. Def</option>
             <option value="speed">Sort: Speed</option>
           </select>
+
         </div>
       </div>
 
       <!-- Type filter badges — JS can also build these dynamically -->
       <div class="type-filter-bar" id="type-filters">
-        <button class="type-badge active" data-type="all">All</button>
-        <button class="type-badge" data-type="Fire">Fire</button>
-        <button class="type-badge" data-type="Water">Water</button>
-        <button class="type-badge" data-type="Grass">Grass</button>
-        <button class="type-badge" data-type="Poison">Poison</button>
-        <button class="type-badge" data-type="Flying">Flying</button>
-        <button class="type-badge" data-type="Psychic">Psychic</button>
-        <button class="type-badge" data-type="Rock">Rock</button>
-        <button class="type-badge" data-type="Ground">Ground</button>
-        <button class="type-badge" data-type="Ice">Ice</button>
-        <button class="type-badge" data-type="Electric">Electric</button>
-        <button class="type-badge" data-type="Ghost">Ghost</button>
-        <button class="type-badge" data-type="Dragon">Dragon</button>
-        <button class="type-badge" data-type="Fighting">Fighting</button>
-        <button class="type-badge" data-type="Normal">Normal</button>
-        <button class="type-badge" data-type="Bug">Bug</button>
+        <button type="button" class="type-badge active" data-type="all">All</button>
+        <button type="button" class="type-badge" data-type="Fire">Fire</button>
+        <button type="button" class="type-badge" data-type="Water">Water</button>
+        <button type="button" class="type-badge" data-type="Grass">Grass</button>
+        <button type="button" class="type-badge" data-type="Poison">Poison</button>
+        <button type="button" class="type-badge" data-type="Flying">Flying</button>
+        <button type="button" class="type-badge" data-type="Psychic">Psychic</button>
+        <button type="button" class="type-badge" data-type="Rock">Rock</button>
+        <button type="button" class="type-badge" data-type="Ground">Ground</button>
+        <button type="button" class="type-badge" data-type="Ice">Ice</button>
+        <button type="button" class="type-badge" data-type="Electric">Electric</button>
+        <button type="button" class="type-badge" data-type="Ghost">Ghost</button>
+        <button type="button" class="type-badge" data-type="Dragon">Dragon</button>
+        <button type="button" class="type-badge" data-type="Fighting">Fighting</button>
+        <button type="button" class="type-badge" data-type="Normal">Normal</button>
+        <button type="button" class="type-badge" data-type="Bug">Bug</button>
       </div>
     </header>
 
@@ -98,7 +102,7 @@
           </div>
         </div>
         <div class="card-footer">
-          <button class="btn-add-team" data-id="" aria-label="Add to team">+ Team</button>
+          <button type="button" class="btn-collect" data-id="" aria-label="Add to collection">+ Collect</button>
         </div>
       </article>
     </template>
@@ -106,7 +110,7 @@
     <!-- ── MODAL (native <dialog>) ───────────────────────── -->
     <dialog id="pokemon-modal" class="pokemon-modal">
       <div class="modal-inner">
-        <button class="modal-close" id="modal-close" aria-label="Close">✕</button>
+        <button type="button" class="modal-close" id="modal-close" aria-label="Close">✕</button>
         <div class="modal-left">
           <span class="modal-number" id="modal-number"></span>
           <div class="modal-badges" id="modal-badges"></div>
@@ -141,24 +145,21 @@
               </div>
             </div>
           </section>
-          <button class="btn-add-team btn-modal-add" id="modal-add-btn" data-id="">+ Add to Team</button>
+          <button type="button" class="btn-add-team btn-modal-add" id="modal-add-btn" data-id="">+ Add to Team</button>
         </div>
       </div>
     </dialog>
 
-    <!-- ── TEAM PANEL (sticky bottom) ────────────────────── -->
-    <aside class="team-panel" id="team-panel">
-      <div class="team-panel-inner">
-        <span class="team-label">My Team</span>
-        <div class="team-slots" id="team-slots">
-          <div class="team-slot empty" data-slot="0"></div>
-          <div class="team-slot empty" data-slot="1"></div>
-          <div class="team-slot empty" data-slot="2"></div>
-          <div class="team-slot empty" data-slot="3"></div>
-          <div class="team-slot empty" data-slot="4"></div>
-          <div class="team-slot empty" data-slot="5"></div>
-        </div>
-        <button class="btn-clear-team" id="clear-team-btn">Clear</button>
+    <!-- ── COLLECTION PANEL (sticky bottom, slides up) ─────── -->
+    <aside class="collection-panel" id="collection-panel">
+      <div class="collection-bar" id="collection-bar">
+        <span class="collection-bar-label">My Collection</span>
+        <span class="collection-bar-count"><span id="collection-count">0</span> caught</span>
+        <span class="collection-bar-arrow" id="collection-arrow">▲</span>
+        <button type="button" class="btn-clear-collection" id="clear-collection-btn">Clear</button>
+      </div>
+      <div class="collection-grid" id="collection-grid">
+        <!-- JS injects collected pokemon images here -->
       </div>
     </aside>
 

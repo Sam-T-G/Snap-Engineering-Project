@@ -186,6 +186,67 @@ body {
 }
 .sort-select:focus { border-color: var(--red); }
 
+/* ── Collection toggle ───────────────── */
+.btn-collection-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--text-2);
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 8px 14px;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+  white-space: nowrap;
+}
+.btn-collection-toggle:hover {
+  border-color: var(--red);
+  color: var(--text-1);
+}
+.btn-collection-toggle.active {
+  background: var(--red-dim);
+  border-color: var(--red);
+  color: #ff6666;
+}
+.collection-count {
+  background: var(--red);
+  color: white;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 10px;
+  min-width: 18px;
+  text-align: center;
+}
+
+/* ── Collect button on card ──────────── */
+.btn-collect {
+  width: 100%;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-2);
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 7px 0;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  letter-spacing: 0.5px;
+}
+.btn-collect:hover {
+  background: var(--red);
+  border-color: var(--red);
+  color: white;
+}
+.btn-collect.collected {
+  background: var(--red-dim);
+  border-color: var(--red);
+  color: #ff6666;
+}
+
 /* ── Type filter bar ─────────────────── */
 .type-filter-bar {
   display: flex;
@@ -322,17 +383,54 @@ body {
   gap: 4px;
 }
 
-.badge {
+.badge,
+[class^="badge-"] {
   font-size: 0.6rem;
   font-weight: 700;
   letter-spacing: 0.5px;
   padding: 3px 7px;
   border-radius: 10px;
   text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
 }
-.badge-legendary { background: rgba(248,200,0,0.15); color: #f8c800; border: 1px solid rgba(248,200,0,0.3); }
-.badge-mythical  { background: rgba(248,88,136,0.15); color: #f85888; border: 1px solid rgba(248,88,136,0.3); }
-.badge-starter   { background: rgba(120,200,80,0.15); color: #78c850; border: 1px solid rgba(120,200,80,0.3); }
+
+/* Shimmer sweep animation */
+@keyframes shimmer {
+  0%   { transform: translateX(-100%) skewX(-15deg); }
+  100% { transform: translateX(250%) skewX(-15deg); }
+}
+
+[class^="badge-"]::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.35) 50%, transparent 100%);
+  transform: translateX(-100%) skewX(-15deg);
+  animation: shimmer 2.4s ease-in-out infinite;
+}
+
+.badge-legendary {
+  background: linear-gradient(135deg, rgba(248,200,0,0.25), rgba(255,160,0,0.15));
+  color: #f8c800;
+  border: 1px solid rgba(248,200,0,0.5);
+  text-shadow: 0 0 8px rgba(248,200,0,0.6);
+  box-shadow: 0 0 6px rgba(248,200,0,0.2);
+}
+.badge-mythical {
+  background: linear-gradient(135deg, rgba(248,88,136,0.25), rgba(180,80,255,0.15));
+  color: #f85888;
+  border: 1px solid rgba(248,88,136,0.5);
+  text-shadow: 0 0 8px rgba(248,88,136,0.6);
+  box-shadow: 0 0 6px rgba(248,88,136,0.2);
+}
+.badge-starter {
+  background: linear-gradient(135deg, rgba(120,200,80,0.25), rgba(80,200,120,0.15));
+  color: #78c850;
+  border: 1px solid rgba(120,200,80,0.5);
+  text-shadow: 0 0 8px rgba(120,200,80,0.4);
+  box-shadow: 0 0 6px rgba(120,200,80,0.15);
+}
 
 /* ── Card image ─────────────────────── */
 .card-image-wrap {
@@ -525,6 +623,7 @@ body {
 
 .pokemon-modal::backdrop {
   background: rgba(0,0,0,0.75);
+  -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
 }
 
@@ -661,104 +760,61 @@ body {
   margin-top: auto;
 }
 
-/* ── TEAM PANEL ─────────────────────────────────────────────── */
-.team-panel {
+/* ── COLLECTION PANEL ───────────────────────────────────────── */
+.collection-panel {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
   z-index: 40;
-  background: rgba(22, 27, 34, 0.92);
+  background: rgba(22, 27, 34, 0.96);
   border-top: 1px solid var(--border);
-  backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  max-height: 56px;
+  overflow: hidden;
+  transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.collection-panel.expanded {
+  max-height: 50vh;
 }
 
-.team-panel-inner {
+.collection-bar {
   display: flex;
   align-items: center;
   gap: 12px;
   padding: 10px 24px;
-  max-width: 1400px;
-  margin: 0 auto;
+  cursor: pointer;
+  user-select: none;
+  height: 56px;
 }
 
-.team-label {
+.collection-bar-label {
   font-size: 0.7rem;
   font-weight: 700;
   color: var(--text-3);
   text-transform: uppercase;
   letter-spacing: 1.5px;
   white-space: nowrap;
-  min-width: 60px;
 }
 
-.team-slots {
-  display: flex;
-  gap: 8px;
+.collection-bar-count {
+  font-size: 0.75rem;
+  color: var(--red);
+  font-weight: 700;
   flex: 1;
 }
 
-.team-slot {
-  width: 60px;
-  height: 60px;
-  border-radius: var(--radius-md);
-  border: 2px dashed var(--border);
-  transition: border-color 0.2s, background 0.2s;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
+.collection-bar-arrow {
+  font-size: 0.65rem;
+  color: var(--text-3);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.collection-panel.expanded .collection-bar-arrow {
+  transform: rotate(180deg);
 }
 
-/* Empty slot shows a faint pokéball */
-.team-slot.empty::after {
-  content: '';
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: linear-gradient(180deg, var(--elevated) 50%, var(--border) 50%);
-  border: 2px solid var(--border);
-  opacity: 0.5;
-}
-
-.team-slot.filled {
-  border-style: solid;
-  border-color: var(--red-dim);
-  background: var(--elevated);
-}
-
-.team-slot img {
-  width: 48px;
-  height: 48px;
-  object-fit: contain;
-  image-rendering: pixelated;
-}
-
-/* Remove button on filled slot */
-.team-slot .slot-remove {
-  position: absolute;
-  top: 2px;
-  right: 2px;
-  background: rgba(204,0,0,0.8);
-  border: none;
-  border-radius: 50%;
-  color: white;
-  cursor: pointer;
-  font-size: 0.55rem;
-  width: 14px;
-  height: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: opacity 0.15s;
-}
-.team-slot:hover .slot-remove { opacity: 1; }
-
-.btn-clear-team {
+.btn-clear-collection {
   background: transparent;
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
@@ -772,7 +828,62 @@ body {
   transition: border-color 0.15s, color 0.15s;
   white-space: nowrap;
 }
-.btn-clear-team:hover { border-color: var(--red); color: var(--red); }
+.btn-clear-collection:hover { border-color: var(--red); color: var(--red); }
+
+.collection-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 12px 24px 20px;
+  overflow-y: auto;
+  max-height: calc(50vh - 56px);
+}
+
+.collection-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  position: relative;
+}
+
+.btn-remove-pokemon {
+  display: none;
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: none;
+  background: var(--red, #e53935);
+  color: #fff;
+  font-size: 0.5rem;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.collection-item:hover .btn-remove-pokemon { display: flex; align-items: center; justify-content: center; }
+
+.collection-item img {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));
+  transition: transform 0.15s;
+}
+.collection-item img:hover { transform: scale(1.15); }
+
+.collection-item-name {
+  font-size: 0.6rem;
+  color: var(--text-3);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
 
 /* ── EMPTY STATE ─────────────────────────────────────────────── */
 .empty-state {
@@ -796,6 +907,5 @@ body {
   .search-input { width: 160px; }
   .modal-inner { grid-template-columns: 1fr; }
   .modal-left { border-right: none; border-bottom: 1px solid var(--border); padding: 24px 20px; }
-  .team-slot { width: 48px; height: 48px; }
-  .team-slot img { width: 36px; height: 36px; }
+  .collection-item img { width: 44px; height: 44px; }
 }
