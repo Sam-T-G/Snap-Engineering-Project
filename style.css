@@ -785,6 +785,7 @@ body {
   gap: 12px;
   padding: 10px 24px;
   cursor: pointer;
+  -webkit-user-select: none;
   user-select: none;
   height: 56px;
 }
